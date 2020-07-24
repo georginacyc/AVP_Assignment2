@@ -5,18 +5,26 @@ import './Tab2.css';
 
 
 interface Product { // TODO:fixme 
+  id: string,
+  name: string,
+  description: string,
+  price: number
 }
 
 
 
 const Tab2: React.FC = () => {
 
-  const [products, setProducts] = [null,null] // TODO:Fixme; 
+  const [products, setProducts] = useState<Product[]>([]) // TODO:Fixme; 
 
   const [showLoading, setShowLoading] = useState<boolean>(true);
 
   const fetchProducts = async () => { 
     // TODO: Fixme 
+    fetch("https://localhost:5001/api/product/all")
+      .then(res => res.json())
+      .then(setProducts)
+      .finally(() => setShowLoading(false))
   }
 
   useEffect(() => { 
@@ -25,6 +33,7 @@ const Tab2: React.FC = () => {
 
   const makeLink = (product: Product) => { 
     // TODO: Fixme
+    return "/tab3/" + product.id
   } 
 
   return ( 
@@ -43,6 +52,15 @@ const Tab2: React.FC = () => {
         <IonList>
           {
             // TODO:fixme
+            products.map((product, index) => (
+              <IonItem key={index} routerLink={makeLink(product)}>
+                <IonLabel>
+                  <h1>{product.name}</h1>
+                  <p>{product.description}</p>
+                  <p>{product.price}</p>
+                </IonLabel>
+              </IonItem>
+            ))
           }
         </IonList>
       </IonContent>
