@@ -27,7 +27,7 @@ type Cart = Dictionary<CartItem>
 
 
 
-const addItem = function(id:string, cart:Cart):Cart { // TODO:fixme 
+const addItem = async(id:string, cart:Cart):Promise<Cart> => { // TODO:fixme 
   if ((id != null) && (id.length > 0)) {
     if ( cart[id] == null) {
       cart[id] = { id:id, qty:1 };
@@ -41,6 +41,11 @@ const addItem = function(id:string, cart:Cart):Cart { // TODO:fixme
 function allItems(cart:Cart): CartItem[] { 
   let res = new Array<CartItem>()
   // TODO: fixme
+  let num = 0;
+  while (cart[num] != null) {
+    res.push(cart[num]);
+    num += 1;
+  }
   return res
 }
 
@@ -49,7 +54,10 @@ const Tab3: React.FC<CartPageProps> = ({match}) => {
   const [ cart, setCart  ] = useLocalStorage<Cart>('cart', {});
 
   useEffect(() => { 
-    // TODO: fixme 
+    // TODO: fixme
+    addItem(match.params.id, cart)
+    setCart(cart)
+    setShowLoading(false)
   }, [cart])
 
   return (
@@ -73,6 +81,7 @@ const Tab3: React.FC<CartPageProps> = ({match}) => {
         <IonList>
           {
             // TODO:fixme
+            
           }
         </IonList>
       </IonContent>
