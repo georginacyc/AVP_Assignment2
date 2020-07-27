@@ -27,7 +27,7 @@ type Cart = Dictionary<CartItem>
 
 
 
-const addItem = async(id:string, cart:Cart):Promise<Cart> => { // TODO:fixme 
+const addItem = async(id:string, cart:Cart) => { // TODO:fixme 
   if ((id != null) && (id.length > 0)) {
     if ( cart[id] == null) {
       cart[id] = { id:id, qty:1 };
@@ -41,10 +41,8 @@ const addItem = async(id:string, cart:Cart):Promise<Cart> => { // TODO:fixme
 function allItems(cart:Cart): CartItem[] { 
   let res = new Array<CartItem>()
   // TODO: fixme
-  let num = 0;
-  while (cart[num] != null) {
-    res.push(cart[num]);
-    num += 1;
+  for (let key in cart) {
+    res.push(cart[key])
   }
   return res
 }
@@ -56,8 +54,8 @@ const Tab3: React.FC<CartPageProps> = ({match}) => {
   useEffect(() => { 
     // TODO: fixme
     addItem(match.params.id, cart)
-    setCart(cart)
-    setShowLoading(false)
+      .then(setCart)
+      .finally(() => setShowLoading(false))
   }, [cart])
 
   return (
@@ -81,7 +79,14 @@ const Tab3: React.FC<CartPageProps> = ({match}) => {
         <IonList>
           {
             // TODO:fixme
-            
+            Object.keys(cart).map((item, index) => (
+              <IonItem key={index}>
+                <IonLabel>
+                  <h1>{cart[item].id}</h1>
+                  <p>Qty:{cart[item].qty}</p>
+                </IonLabel>
+              </IonItem>
+            ))
           }
         </IonList>
       </IonContent>
