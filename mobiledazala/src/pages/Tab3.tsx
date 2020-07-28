@@ -5,6 +5,7 @@ import ExploreContainer from '../components/ExploreContainer';
 import './Tab3.css';
 import { RouteComponentProps } from 'react-router';
 import useLocalStorage from '../components/LocalStorage'
+import { useIonViewDidEnter } from '@ionic/react';
 
 interface CartPageProps extends RouteComponentProps<{
   id: string;
