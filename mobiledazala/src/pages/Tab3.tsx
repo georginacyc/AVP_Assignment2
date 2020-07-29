@@ -57,7 +57,7 @@ const Tab3: React.FC<CartPageProps> = ({match}) => {
     addItem(match.params.id, cart)
       .then(setCart)
       .finally(() => setShowLoading(false))
-  }, [cart, match.params.id, setCart])
+  }, [cart])
 
   return (
     <IonPage>
