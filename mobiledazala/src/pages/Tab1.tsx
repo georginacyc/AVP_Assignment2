@@ -1,3 +1,5 @@
+// Group Members: Georgina Chew (180954W), Jonathon Low (192739S)
+
 import React from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonLabel } from '@ionic/react'; // TODO: fixme 
 import './Tab1.css';
