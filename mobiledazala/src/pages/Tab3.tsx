@@ -31,7 +31,7 @@ type Cart = Dictionary<CartItem>
 const addItem = async(id:string, cart:Cart) => { // TODO:fixme 
   if ((id != null) && (id.length > 0)) {
     if ( cart[id] == null) {
-      cart[id] = { id:id, qty:1 };
+      cart[id] = { id:id, name: 'Xiaomi Mi Power Banks Powerbank 2', price: 17.8, qty:1 };
     } else {
       cart[id].qty += 1 
     }
@@ -83,7 +83,8 @@ const Tab3: React.FC<CartPageProps> = ({match}) => {
             Object.keys(cart).map((item, index) => (
               <IonItem key={index}>
                 <IonLabel>
-                  <h1>{cart[item].id}</h1>
+                  <h1>{cart[item].id}: {cart[item].name}</h1>
+                  <p>S${cart[item].price}</p>
                   <p>Qty:{cart[item].qty}</p>
                 </IonLabel>
               </IonItem>
